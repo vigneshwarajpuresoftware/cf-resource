@@ -2,7 +2,7 @@ ARG base_image
 ARG builder_image=concourse/golang-builder
 
 FROM ${builder_image} as builder
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt update && apt install -y --no-install-recommends \
     curl \
     jq \
   && rm -rf /var/lib/apt/lists/*
@@ -20,7 +20,8 @@ RUN set -e; for pkg in $(go list ./... | grep -v "acceptance"); do \
 	done
 
 FROM ${base_image} AS resource
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt update && apt upgrade -y -o Dpkg::Options::="--force-confdef"
+RUN apt update && apt install -y --no-install-recommends \
     tzdata \
     ca-certificates \
   && rm -rf /var/lib/apt/lists/*
