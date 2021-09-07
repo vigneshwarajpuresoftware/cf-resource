@@ -23,6 +23,6 @@ jobs:
           context: .
           file: cf-resource/dockerfiles/alpine
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: true 
           tags: |
             ajv21/cf-resource:latest
